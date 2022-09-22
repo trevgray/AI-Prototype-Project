@@ -35,6 +35,7 @@ public:
 	}
 
 	void Update(float time);
+	void SteerToSeekPlayer(SteeringOutput* steering);
 	void HandleEvents(const SDL_Event& event);
 	void render(float scale = 1.0f);
 

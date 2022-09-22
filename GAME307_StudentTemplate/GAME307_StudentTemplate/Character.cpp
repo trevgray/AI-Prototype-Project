@@ -37,26 +37,44 @@ bool Character::OnCreate(Scene* scene_)
 	return true;
 }
 
+//SteeringComponent(std::vector<SteeringBehaviour> steeringBehaviours, Ref<Actor> targetActor);
+
 void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :)
 {
 	// create a new overall steering output
 	SteeringOutput* steering; //probably do this in oncreate
+	steering = new SteeringOutput();
 
 	// set the target for steering; target is used by the steerTo... functions
 	// (often the target is the Player)
 
-	PlayerBody* target = scene->game->getPlayer(); //probably do this in oncreate
+
 
 	// using the target, calculate and set values in the overall steering output
 
-	SteeringBehaviour* steering_algorithm = new Seek(body, target);
-	steering = steering_algorithm->getSteering();
+	SteerToSeekPlayer(steering);
 
 	// apply the steering to the equations of motion
 	body->Update(deltaTime, steering); //just call the boy update - then do all the steering update stuff in the steering component update
 
 	// clean up memory
 	// (delete only those objects created in this function)
+	if (steering) { delete steering; }
+}
+
+void Character::SteerToSeekPlayer(SteeringOutput* steering) {
+	PlayerBody* target = scene->game->getPlayer(); //probably do this in oncreate
+
+	std::vector<SteeringOutput*> steeringOutputs;
+	SteeringBehaviour* steering_algorithm = new Seek(body, target); //probably make a vector of steering behaviours in the constructor
+	steeringOutputs.push_back(steering_algorithm->getSteering());
+
+	//add together all steering outputs
+	for (unsigned i = 0; i < steeringOutputs.size(); i++) {
+		if (steeringOutputs[i]) { //if exists
+			*steering += *steeringOutputs[i]; //use the overload in the steering output to add them together - * dereferences a pointer
+		}
+	}
 }
 
 void Character::HandleEvents(const SDL_Event& event)
