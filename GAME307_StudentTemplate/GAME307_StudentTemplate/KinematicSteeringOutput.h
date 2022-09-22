@@ -4,7 +4,7 @@ using namespace MATH;
 class KinematicSteeringOutput {
 public:
 	Vec3 velocity;
-	float rotation;
+	float rotation; //quaternion
 
 	KinematicSteeringOutput();
 	KinematicSteeringOutput(Vec3 velocity, float rotation);

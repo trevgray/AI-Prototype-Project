@@ -8,14 +8,14 @@
 
 using namespace MATH;
 
-class Body {
+class Body { //name this physics body
 protected:
 	// inherited classes can access this
-	Vec3 pos;
+	Vec3 pos; //remove this
 	Vec3 vel;
 	Vec3 accel;
 	float mass;
-    float orientation;		// facing this direction
+    float orientation;	// facing this direction
     float rotation;			// rotating at this speed (radians per second?)
     float angular;          // angular acceleration
     float maxSpeed;
@@ -57,6 +57,7 @@ public:
     virtual float getMaxRotation() { return maxRotation; }
     virtual float getMaxAngular() { return maxAngular; }
 
+    virtual void setVel(Vec3 vel_) { vel = vel_; }
     virtual void setImage(SDL_Surface* image_) { image = image_; }
     virtual SDL_Surface* getImage() { return image; }
 

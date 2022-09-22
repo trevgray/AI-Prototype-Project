@@ -51,7 +51,8 @@ bool Scene1::OnCreate() {
 	{
 		return false;
 	}
-	myNpc = new StaticBody(Vec3(3, 3,0), 0.0f, 6.5f,1.0f);
+	myNpc = new StaticBody(Vec3(3, 3,0), 0.0f, 2.0f,50.0f);
+	myNpc->setVel(Vec3(1.0f, 0.0f, 0.0f));
 
 	image = IMG_Load("Blinky.png");
 	texture = SDL_CreateTextureFromSurface(renderer, image);
@@ -87,11 +88,11 @@ void Scene1::Update(const float deltaTime) {
 	blinky->Update(deltaTime);
 
 	Body* player = game->getPlayer();
-	KinematicArrive* steeringAlgorithum;
-	steeringAlgorithum = new KinematicArrive(myNpc, player, 2.5f, 0.25f);
+	/*KinematicArrive* steeringAlgorithum;
+	steeringAlgorithum = new KinematicArrive(myNpc, player, 2.0, 1.0);
 	KinematicSteeringOutput* steering;
 	steering = steeringAlgorithum->GetSteering();
-	myNpc->Update(deltaTime, steering);
+	myNpc->Update(deltaTime, steering)*/;
 
 	// Update player
 	game->getPlayer()->Update(deltaTime);
@@ -102,21 +103,21 @@ void Scene1::Render() {
 	SDL_RenderClear(renderer);
 
 	// render any npc's
-	//blinky->render(0.15f);
+	blinky->render(0.15f);
 
 	SDL_Rect square;
 	Vec3 screenCoords;
 	int w, h;
 
 	// notice use of "body" in the following
-	SDL_QueryTexture(myNpc->getTexture(), nullptr, nullptr, &w, &h);
+	/*SDL_QueryTexture(myNpc->getTexture(), nullptr, nullptr, &w, &h);
 	w = static_cast<int>(w * 0.15);
 	h = static_cast<int>(h * 0.15);
 	screenCoords = projectionMatrix * myNpc->getPos();
 	square.x = static_cast<int>(screenCoords.x - 0.5f * w);
 	square.y = static_cast<int>(screenCoords.y - 0.5f * h);
 	square.w = w;
-	square.h = h;
+	square.h = h;*/
 
 	// Convert character orientation from radians to degrees.
 	float orientation = myNpc->getOrientation() * 180.0f / M_PI;

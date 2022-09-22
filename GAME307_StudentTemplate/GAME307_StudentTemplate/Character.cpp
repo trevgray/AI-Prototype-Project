@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "Seek.h"
 
 bool Character::OnCreate(Scene* scene_)
 {
@@ -36,19 +37,23 @@ bool Character::OnCreate(Scene* scene_)
 	return true;
 }
 
-void Character::Update(float deltaTime)
+void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :)
 {
 	// create a new overall steering output
-	SteeringOutput* steering;
-	steering = NULL;
+	SteeringOutput* steering; //probably do this in oncreate
 
 	// set the target for steering; target is used by the steerTo... functions
 	// (often the target is the Player)
 
+	PlayerBody* target = scene->game->getPlayer(); //probably do this in oncreate
+
 	// using the target, calculate and set values in the overall steering output
 
+	SteeringBehaviour* steering_algorithm = new Seek(body, target);
+	steering = steering_algorithm->getSteering();
+
 	// apply the steering to the equations of motion
-	body->Update(deltaTime, steering);
+	body->Update(deltaTime, steering); //just call the boy update - then do all the steering update stuff in the steering component update
 
 	// clean up memory
 	// (delete only those objects created in this function)
