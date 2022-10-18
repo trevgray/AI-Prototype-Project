@@ -44,8 +44,13 @@ bool Scene2::OnCreate() {
 	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[3]->GetLabel(), 1.0f);
 	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[4]->GetLabel(), 1.0f);
 
-	for (int n : graph->neighbours(2)) {
-		std::cout << "node " << n << std::endl;
+	std::vector<int> path;
+	int current = 0;
+
+	std::vector<int> cameFrom = graph->Dijkstra(4, 0);
+	while (current != 4) {
+		path.push_back(current);
+		current = cameFrom[current];
 	}
 
 	return true;

@@ -1,4 +1,15 @@
 #include "Graph.h"
+#include "NodeAndPriority.h"
+#include <iostream>
+
+struct ComparePriority
+{
+	bool operator()(NodeAndPriority const& lhs, NodeAndPriority const& rhs)
+	{
+		// make it a min queue
+		return lhs.priority > rhs.priority;
+	}
+};
 
 Graph::Graph() {
 	
@@ -53,12 +64,12 @@ std::vector<int> Graph::neighbours(int fromNode) {
 
 std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
 	//declare helper variables
-	float new_cost;
+	float newCost;
 	int current;
 
 	//declare current NodeAndPriority
 	NodeAndPriority* currentNodeAndPriority; //missing node and priority
-	currentNodeAndPriority = new NodeAndPriority(startNode, 0.0f);
+	currentNodeAndPriority = new NodeAndPriority(node[startNode], 0.0f);
 	//set up priority queue for frontier of nodes
 	std::priority_queue<NodeAndPriority, std::deque<NodeAndPriority> , ComparePriority> frontier;
 	frontier.push(*currentNodeAndPriority);
@@ -72,17 +83,25 @@ std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
 	//TODO implement the algorithm
 
 	//start looping through the frontier
-
-	{
+	while (frontier.size() > 0) {
 		//get the node from the top of the frontier, put it in "current"
+		current = frontier.top().node->GetLabel();
 		//pop it off
+		frontier.pop();
 		//if its the goal, then break of the loop
+		if (current == goalNode) {
+			break;
+		}
 		//for the neighbors of current
-		{
+		for (int nextNode : neighbours(current)) {
 			//calculate newCost
-			//if neightbor is not in costSoFar or newCost is lower
-			{
-				//found a better path so update structure (look at pseudocode algorithm)
+			newCost = costSoFar[current] + cost[current][nextNode];
+			//if neighbor is not in costSoFar or newCost is lower
+			if (costSoFar[nextNode] == 0.0f || newCost < costSoFar[nextNode]) {
+				//found a better path so update structure (look at pseudo code algorithm)
+				costSoFar[nextNode] = newCost;
+				frontier.push(NodeAndPriority(node[nextNode], newCost));
+				cameFrom[nextNode] = current;
 			}
 		}
 	}
