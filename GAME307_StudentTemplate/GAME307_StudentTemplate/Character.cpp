@@ -37,9 +37,7 @@ bool Character::OnCreate(Scene* scene_)
 	return true;
 }
 
-//SteeringComponent(std::vector<SteeringBehaviour> steeringBehaviours, Ref<Actor> targetActor);
-
-void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :)
+void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :) - SteeringComponent(std::vector<SteeringBehaviour> steeringBehaviours);
 {
 	// create a new overall steering output
 	SteeringOutput* steering; //probably do this in oncreate

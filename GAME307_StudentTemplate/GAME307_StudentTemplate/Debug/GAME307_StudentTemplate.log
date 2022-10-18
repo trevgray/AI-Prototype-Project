@@ -1,9 +1,2 @@
-﻿  Character.cpp
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Character.cpp(11,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Character.cpp(103,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  GameManager.cpp
-  Scene1.cpp
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene1.cpp(110,9): warning C4101: 'h': unreferenced local variable
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene1.cpp(110,6): warning C4101: 'w': unreferenced local variable
-  Generating Code...
+﻿  Scene2.cpp
   GAME307_StudentTemplate.vcxproj -> E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\Debug\GAME307_StudentTemplate.exe

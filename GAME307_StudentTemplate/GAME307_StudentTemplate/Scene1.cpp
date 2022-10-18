@@ -51,7 +51,7 @@ bool Scene1::OnCreate() {
 	{
 		return false;
 	}
-	myNpc = new StaticBody(Vec3(3, 3,0), 0.0f, 2.0f,50.0f);
+	myNpc = new StaticBody(Vec3(10, 10,0), 0.0f, 5.0f,150.0f);
 	myNpc->setVel(Vec3(1.0f, 0.0f, 0.0f));
 
 	image = IMG_Load("Blinky.png");
@@ -96,6 +96,7 @@ void Scene1::Update(const float deltaTime) {
 
 	// Update player
 	game->getPlayer()->Update(deltaTime);
+	std::cout << blinky->GetBody()->getPos().x << " " << blinky->GetBody()->getPos().y << " " << blinky->GetBody()->getPos().z << std::endl;
 }
 
 void Scene1::Render() {
