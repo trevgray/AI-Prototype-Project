@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "Graph.h"
+#include "Tile.h"
 
 class Scene2 : public Scene {
 private:
@@ -14,6 +15,13 @@ private:
 
 	Graph* graph;
 	std::vector<Node*> nodes;
+
+	std::vector<std::vector<Tile*>> tiles;
+	float tileWidth = 2.5f;
+	float tileHeight = 1.5f;
+
+	void CreateTiles(int rows, int cols);
+	void CalculateConnectionWeights();
 public:
 	Scene2(SDL_Window* sdlWindow, GameManager* game_);
 	~Scene2();
