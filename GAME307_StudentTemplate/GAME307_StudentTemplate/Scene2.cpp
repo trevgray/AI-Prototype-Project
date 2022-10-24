@@ -61,15 +61,15 @@ bool Scene2::OnCreate() {
 	//since the nodes are created here, then the scene is responsible for deleting them later
 	
 	//connections from other nodes to 2
-	graph->addWeightConnection(nodes[0]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[1]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[3]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[4]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[0]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[1]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[3]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[4]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
 	//connections from 2
-	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[0]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[1]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[3]->GetLabel(), 1.0f);
-	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[4]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[2]->GetLabel(), nodes[0]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[2]->GetLabel(), nodes[1]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[2]->GetLabel(), nodes[3]->GetLabel(), 1.0f);
+	graph->AddWeightConnection(nodes[2]->GetLabel(), nodes[4]->GetLabel(), 1.0f);
 
 	std::vector<int> path;
 	int current = 0;
@@ -135,22 +135,22 @@ void Scene2::CalculateConnectionWeights() {
 			//left is i,j-1
 			if (j > 0) { //because j-1
 				int toNodeLabel = tiles[i][j - 1]->GetNode()->GetLabel();
-				graph->addWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
+				graph->AddWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
 			}
 			//right is i,j+1
 			if (j < cols - 1) {
 				int toNodeLabel = tiles[i][j + 1]->GetNode()->GetLabel();
-				graph->addWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
+				graph->AddWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
 			}
 			//top is i+1,j
 			if (i < rows - 1) {
 				int toNodeLabel = tiles[i + 1][j]->GetNode()->GetLabel();
-				graph->addWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
+				graph->AddWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
 			}
 			//bottom is i-1,j
 			if (i > 0) {
 				int toNodeLabel = tiles[i - 1][j]->GetNode()->GetLabel();
-				graph->addWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
+				graph->AddWeightConnection(fromNodeLabel, toNodeLabel, tileWidth);
 			}
 		}
 	}

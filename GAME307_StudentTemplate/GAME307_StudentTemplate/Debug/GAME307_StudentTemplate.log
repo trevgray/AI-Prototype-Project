@@ -1,4 +1,3 @@
-﻿  Scene2.cpp
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(172,20): warning C4018: '<': signed/unsigned mismatch
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(173,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Graph.cpp
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Graph.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
   GAME307_StudentTemplate.vcxproj -> E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\Debug\GAME307_StudentTemplate.exe

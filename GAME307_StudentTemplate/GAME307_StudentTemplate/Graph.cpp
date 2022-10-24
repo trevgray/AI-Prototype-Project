@@ -2,17 +2,14 @@
 #include "NodeAndPriority.h"
 #include <iostream>
 
-struct ComparePriority
-{
+struct ComparePriority {
 	bool operator()(NodeAndPriority const& lhs, NodeAndPriority const& rhs) {
 		// make it a min queue
 		return lhs.priority > rhs.priority;
 	}
 };
 
-Graph::Graph() {
-	
-}
+Graph::Graph() {}
 
 Graph::~Graph() {}
 
@@ -47,11 +44,11 @@ size_t Graph::NumNodes() {
 	return node.size();
 }
 
-void Graph::addWeightConnection(int fromNode, int toNode, float weight) {
+void Graph::AddWeightConnection(int fromNode, int toNode, float weight) {
 	cost[fromNode][toNode] = weight;
 }
 
-std::vector<int> Graph::neighbours(int fromNode) {
+std::vector<int> Graph::Neighbours(int fromNode) {
 	std::vector<int> result = {};
 	for (int x = 0; x < NumNodes()/*cost[fromNode] == node.size()*/; x++) {
 		if (cost[fromNode][x] > 0.0f) {
@@ -90,13 +87,13 @@ std::vector<int> Graph::AStar(int startNode, int goalNode) {
 			break;
 		}
 		//for the neighbors of current
-		for (int nextNode : neighbours(current)) {
+		for (int nextNode : Neighbours(current)) {
 			//calculate newCost
 			newCost = costSoFar[current] + cost[current][nextNode];
 			//if neighbor is not in costSoFar or newCost is lower
 			if (costSoFar[nextNode] == 0.0f || newCost < costSoFar[nextNode]) {
 				//found a better path so update structure (look at pseudo code algorithm)
-				costSoFar[nextNode] = newCost + Heuristic(goalNode, nextNode);
+				costSoFar[nextNode] = newCost + Heuristic(nextNode, goalNode); //+ Heuristic
 				frontier.push(NodeAndPriority(node[nextNode], newCost));
 				cameFrom[nextNode] = current;
 			}
@@ -110,9 +107,9 @@ float Graph::Heuristic(int startNode, int goalNode) {
 	float dy = abs(node[startNode]->GetPos().y - node[goalNode]->GetPos().y);
 
 	float D = 1;
-	float D2 = 1;
 
-	return D * (dx + dy) + (D2 - 2 * D) * fmin(dx, dy);
+	//return D * sqrt(dx * dx + dy * dy); //Euclidean distance - http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+	return D * (dx * dx + dy * dy); //avoid the expensive square root in the Euclidean distance by using distance-squared
 }
 
 std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
@@ -144,7 +141,7 @@ std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
 			break;
 		}
 		//for the neighbors of current
-		for (int nextNode : neighbours(current)) {
+		for (int nextNode : Neighbours(current)) {
 			//calculate newCost
 			newCost = costSoFar[current] + cost[current][nextNode];
 			//if neighbor is not in costSoFar or newCost is lower
