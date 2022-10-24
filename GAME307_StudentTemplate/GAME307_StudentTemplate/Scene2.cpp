@@ -15,19 +15,42 @@ bool Scene2::OnCreate() {
 	int window_h;
 	SDL_GetWindowSize(window, &window_w, &window_h);
 
-	Matrix4 ndc = MMath::viewportNDC(window_w, window_h);
-	Matrix4 ortho = MMath::orthographic(0.0f, xAxis, 0.0f, yAxis, 0.0f, 1.0f);
-	projectionMatrix = ndc * ortho;
-	inverseProjection = MMath::inverse(projectionMatrix);
+	//Matrix4 ndc = MMath::viewportNDC(window_w, window_h);
+	//Matrix4 ortho = MMath::orthographic(0.0f, xAxis, 0.0f, yAxis, 0.0f, 1.0f);
+	//projectionMatrix = ndc * ortho;
+	//inverseProjection = MMath::inverse(projectionMatrix);
 
-	//turn on SDL_imaging
-	IMG_Init(IMG_INIT_PNG);
+	////turn on SDL_imaging
+	//IMG_Init(IMG_INIT_PNG);
 
-	//create a tile with a node
-	int cols = ceil(xAxis / tileWidth);
-	int rows = ceil(yAxis / tileHeight);
-	CreateTiles(rows, cols);
-	//this createTiles is also going to populate nodes list
+	////create a tile with a node
+	//int cols = ceil(xAxis / tileWidth);
+	//int rows = ceil(yAxis / tileHeight);
+	//CreateTiles(rows, cols);
+	////this createTiles is also going to populate nodes list
+
+	////create graph. an empty graph
+	//graph = new Graph();
+	//if (!graph->OnCreate(nodes)) {
+	//	return false;
+	//}
+
+	//CalculateConnectionWeights();
+
+	//let's set up a graph and test it out
+	//      0
+	//      |
+	// 1----2----3
+	//      |
+	//      4
+
+	int count = 5;
+	nodes.resize(count);
+
+	//create nodes
+	for (int x = 0; x < count; x++) {
+		nodes[x] = new Node(x); //create 5 nodes labeled 1,2,3,4,5
+	}
 
 	//create graph. an empty graph
 	graph = new Graph();
@@ -35,49 +58,33 @@ bool Scene2::OnCreate() {
 		return false;
 	}
 
-	CalculateConnectionWeights();
-
-	////let's set up a graph and test it out
-	////      0
-	////      |
-	//// 1----2----3
-	////      |
-	////      4
-
-	//int count = 5;
-	//nodes.resize(count);
-
-	////create nodes
-	//for (int x = 0; x < count; x++) {
-	//	nodes[x] = new Node(x); //create 5 nodes labeled 1,2,3,4,5
-	//}
 	//since the nodes are created here, then the scene is responsible for deleting them later
 	
-	////connections from other nodes to 2
-	//graph->addWeightConnection(nodes[0]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[1]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[3]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[4]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
-	////connections from 2
-	//graph->addWeightConnection(nodes[2]->GetLabel(), nodes[0]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[2]->GetLabel(), nodes[1]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[2]->GetLabel(), nodes[3]->GetLabel(), 1.0f);
-	//graph->addWeightConnection(nodes[2]->GetLabel(), nodes[4]->GetLabel(), 1.0f);
+	//connections from other nodes to 2
+	graph->addWeightConnection(nodes[0]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[1]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[3]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[4]->GetLabel(), nodes[2]->GetLabel(), 1.0f);
+	//connections from 2
+	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[0]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[1]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[3]->GetLabel(), 1.0f);
+	graph->addWeightConnection(nodes[2]->GetLabel(), nodes[4]->GetLabel(), 1.0f);
 
-	//std::vector<int> path;
-	//int current = 0;
+	std::vector<int> path;
+	int current = 0;
 
-	//int goal = 4;
+	int goal = 4;
 
-	//std::vector<int> cameFrom = graph->Dijkstra(goal, 0);
-	//while (current != goal) {
-	//	path.push_back(current);
-	//	current = cameFrom[current];
-	//}
+	std::vector<int> cameFrom = graph->AStar(goal, 0);
+	while (current != goal) {
+		path.push_back(current);
+		current = cameFrom[current];
+	}
 
-	//for (int loop : path) {
-	//	std::cout << loop << std::endl;
-	//}
+	for (int loop : path) {
+		std::cout << loop << std::endl;
+	}
 
 	return true;
 }

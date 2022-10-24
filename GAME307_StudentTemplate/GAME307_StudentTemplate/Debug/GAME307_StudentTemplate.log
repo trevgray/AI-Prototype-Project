@@ -1,8 +1,4 @@
-﻿  GameManager.cpp
-  Scene2.cpp
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(27,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(28,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(165,20): warning C4018: '<': signed/unsigned mismatch
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(166,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  Scene2.cpp
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(172,20): warning C4018: '<': signed/unsigned mismatch
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene2.cpp(173,21): warning C4018: '<': signed/unsigned mismatch
   GAME307_StudentTemplate.vcxproj -> E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\Debug\GAME307_StudentTemplate.exe

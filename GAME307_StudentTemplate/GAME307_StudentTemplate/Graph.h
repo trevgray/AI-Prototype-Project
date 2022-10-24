@@ -22,5 +22,7 @@ public:
 	Node* GetNode(int label) { return node[label]; }
 	void addWeightConnection(int fromNode, int toNode, float weight);
 	std::vector<int> neighbours(int fromNode);
+	std::vector<int> AStar(int startNode, int goalNode);
+	float Heuristic(int startNode, int goalNode);
 	std::vector<int> Dijkstra(int startNode, int goalNode);
 };

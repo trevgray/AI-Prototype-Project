@@ -4,8 +4,7 @@
 
 struct ComparePriority
 {
-	bool operator()(NodeAndPriority const& lhs, NodeAndPriority const& rhs)
-	{
+	bool operator()(NodeAndPriority const& lhs, NodeAndPriority const& rhs) {
 		// make it a min queue
 		return lhs.priority > rhs.priority;
 	}
@@ -62,6 +61,60 @@ std::vector<int> Graph::neighbours(int fromNode) {
 	return result;
 }
 
+std::vector<int> Graph::AStar(int startNode, int goalNode) {
+	//declare helper variables
+	float newCost;
+	int current;
+
+	//declare current NodeAndPriority
+	NodeAndPriority* currentNodeAndPriority; //missing node and priority
+	currentNodeAndPriority = new NodeAndPriority(node[startNode], 0.0f);
+	//set up priority queue for frontier of nodes
+	std::priority_queue<NodeAndPriority, std::deque<NodeAndPriority>, ComparePriority> frontier;
+	frontier.push(*currentNodeAndPriority);
+	//track solution path
+	std::vector<int> cameFrom;
+	cameFrom.resize(NumNodes());
+	//store cost so far to reach a node
+	std::map<int, float> costSoFar;
+	costSoFar[startNode] = 0.0f;
+
+	//start looping through the frontier
+	while (frontier.size() > 0) {
+		//get the node from the top of the frontier, put it in "current"
+		current = frontier.top().node->GetLabel();
+		//pop it off
+		frontier.pop();
+		//if its the goal, then break of the loop
+		if (current == goalNode) {
+			break;
+		}
+		//for the neighbors of current
+		for (int nextNode : neighbours(current)) {
+			//calculate newCost
+			newCost = costSoFar[current] + cost[current][nextNode];
+			//if neighbor is not in costSoFar or newCost is lower
+			if (costSoFar[nextNode] == 0.0f || newCost < costSoFar[nextNode]) {
+				//found a better path so update structure (look at pseudo code algorithm)
+				costSoFar[nextNode] = newCost + Heuristic(goalNode, nextNode);
+				frontier.push(NodeAndPriority(node[nextNode], newCost));
+				cameFrom[nextNode] = current;
+			}
+		}
+	}
+	return cameFrom;
+}
+
+float Graph::Heuristic(int startNode, int goalNode) {
+	float dx = abs(node[startNode]->GetPos().x - node[goalNode]->GetPos().x);
+	float dy = abs(node[startNode]->GetPos().y - node[goalNode]->GetPos().y);
+
+	float D = 1;
+	float D2 = 1;
+
+	return D * (dx + dy) + (D2 - 2 * D) * fmin(dx, dy);
+}
+
 std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
 	//declare helper variables
 	float newCost;
@@ -79,8 +132,6 @@ std::vector<int> Graph::Dijkstra(int startNode, int goalNode) {
 	//store cost so far to reach a node
 	std::map<int, float> costSoFar;
 	costSoFar[startNode] = 0.0f;
-
-	//TODO implement the algorithm
 
 	//start looping through the frontier
 	while (frontier.size() > 0) {
