@@ -7,6 +7,10 @@
 #include "KinematicBody.h"
 #include "SteeringBehaviour.h"
 
+#include "Decision.h" //which includes DecisionTreeNode.h
+#include "InRangeDecision.h"
+#include "Action.h"
+
 using namespace std;
 
 class Character
@@ -14,6 +18,8 @@ class Character
 private:
 	class KinematicBody* body;
 	class Scene* scene;
+
+	DecisionTreeNode* decider;
 
 public:
 	Character()
@@ -40,6 +46,8 @@ public:
 	void render(float scale = 1.0f);
 
 	KinematicBody* GetBody() { return body; }
+	Vec3 GetPos() { return body->getPos(); }
+	Vec3 GetPlayerPos() { return scene->game->getPlayer()->getPos(); }
 };
 
 #endif

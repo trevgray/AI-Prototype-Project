@@ -1,3 +1,11 @@
-﻿  Graph.cpp
-E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Graph.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
+﻿  Character.cpp
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Character.cpp(16,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Character.cpp(110,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Decision.cpp
+  GameManager.cpp
+  InRangeDecision.cpp
+  Scene1.cpp
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene1.cpp(111,9): warning C4101: 'h': unreferenced local variable
+E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\GAME307_StudentTemplate\Scene1.cpp(111,6): warning C4101: 'w': unreferenced local variable
+  Generating Code...
   GAME307_StudentTemplate.vcxproj -> E:\GitHub\AI-Prototype-Project\GAME307_StudentTemplate\Debug\GAME307_StudentTemplate.exe

@@ -133,10 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Decision.cpp" />
+    <ClCompile Include="DecisionTreeNode.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="InRangeDecision.cpp" />
     <ClCompile Include="KinematicArrive.cpp" />
     <ClCompile Include="KinematicSeek.cpp" />
     <ClCompile Include="KinematicSteeringOutput.cpp" />
@@ -159,10 +163,14 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Decision.h" />
+    <ClInclude Include="DecisionTreeNode.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="InRangeDecision.h" />
     <ClInclude Include="KinematicArrive.h" />
     <ClInclude Include="KinematicSeek.h" />
     <ClInclude Include="KinematicSteeringOutput.h" />
