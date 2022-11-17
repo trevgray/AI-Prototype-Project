@@ -33,6 +33,7 @@ public:
 		if (body) delete body;
 	};
 	bool OnCreate(Scene* scene_);
+	bool ReadDecisionTreeXML(std::string filename);
 	void OnDestroy() {};
 	
 	void setTexture(SDL_Texture* texture_) 

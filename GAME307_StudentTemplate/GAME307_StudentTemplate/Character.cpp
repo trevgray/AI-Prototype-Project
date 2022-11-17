@@ -5,11 +5,6 @@ bool Character::OnCreate(Scene* scene_)
 {
 	scene = scene_;
 
-	DecisionTreeNode* trueNode = new Action();
-	DecisionTreeNode* falseNode = new Action();
-
-	decider = new InRangeDecision(this, trueNode, falseNode);
-
 	// Configure and instantiate the body to use for the demo
 	if (!body)
 	{
@@ -42,6 +37,16 @@ bool Character::OnCreate(Scene* scene_)
 	return true;
 }
 
+bool Character::ReadDecisionTreeXML(std::string filename) {
+	//lets pretend the XML parsing produced these instances
+	DecisionTreeNode* trueNode = new Action(ACTION_SET::SEEK);
+	DecisionTreeNode* falseNode = new Action(ACTION_SET::DO_NOTHING);
+
+	decider = new InRangeDecision(this, trueNode, falseNode);
+
+	return true;
+}
+
 void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :) - SteeringComponent(std::vector<SteeringBehaviour> steeringBehaviours);
 {
 	// create a new overall steering output
@@ -51,11 +56,21 @@ void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERI
 	// set the target for steering; target is used by the steerTo... functions
 	// (often the target is the Player)
 
-
+	if (decider != nullptr) {
+		DecisionTreeNode* action = decider->MakeDecision();
+		Action* a = dynamic_cast<Action*>(action);
+		switch (a->GetValue()) {
+		case ACTION_SET::SEEK:
+			SteerToSeekPlayer(steering);
+			break;
+		case ACTION_SET::DO_NOTHING:
+			break;
+		}
+	}
 
 	// using the target, calculate and set values in the overall steering output
 
-	SteerToSeekPlayer(steering);
+	//SteerToSeekPlayer(steering);
 
 	// apply the steering to the equations of motion
 	body->Update(deltaTime, steering); //just call the boy update - then do all the steering update stuff in the steering component update
@@ -63,8 +78,6 @@ void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERI
 	// clean up memory
 	// (delete only those objects created in this function)
 	if (steering) { delete steering; }
-
-	decider->MakeDecision();
 }
 
 void Character::SteerToSeekPlayer(SteeringOutput* steering) {

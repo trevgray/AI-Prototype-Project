@@ -76,6 +76,7 @@ bool Scene1::OnCreate() {
 		myNpc->setTexture(texture);
 		SDL_FreeSurface(image);
 	}
+	blinky->ReadDecisionTreeXML("temp.xml");
 	// end of character set ups
 
 	return true;

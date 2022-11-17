@@ -1,8 +1,8 @@
 #include "Decision.h"
 
-void Decision::MakeDecision() {
+DecisionTreeNode* Decision::MakeDecision() {
 	DecisionTreeNode* branch = GetBranch();
-	branch->MakeDecision();
+	return branch->MakeDecision();
 }
 
 bool Decision::TestValue() {

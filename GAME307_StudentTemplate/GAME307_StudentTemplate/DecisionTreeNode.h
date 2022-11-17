@@ -9,5 +9,5 @@ class DecisionTreeNode {
 protected:
 	Character* owner;
 public:
-	virtual void MakeDecision() = 0;
+	virtual DecisionTreeNode* MakeDecision() = 0;
 };
