@@ -7,6 +7,8 @@
 #include "KinematicBody.h"
 #include "SteeringBehaviour.h"
 
+#include "StateMachine.h"
+
 #include "Decision.h" //which includes DecisionTreeNode.h
 #include "InRangeDecision.h"
 #include "Action.h"
@@ -19,6 +21,7 @@ private:
 	class KinematicBody* body;
 	class Scene* scene;
 
+	StateMachine* stateMachine;
 	DecisionTreeNode* decider;
 
 public:
@@ -33,6 +36,7 @@ public:
 		if (body) delete body;
 	};
 	bool OnCreate(Scene* scene_);
+	bool ReadStateMachineXML(std::string filename);
 	bool ReadDecisionTreeXML(std::string filename);
 	void OnDestroy() {};
 	

@@ -76,7 +76,8 @@ bool Scene1::OnCreate() {
 		myNpc->setTexture(texture);
 		SDL_FreeSurface(image);
 	}
-	blinky->ReadDecisionTreeXML("temp.xml");
+	//blinky->ReadDecisionTreeXML("temp.xml"); //Decision Tree
+	blinky->ReadStateMachineXML("temp.xml");
 	// end of character set ups
 
 	return true;
