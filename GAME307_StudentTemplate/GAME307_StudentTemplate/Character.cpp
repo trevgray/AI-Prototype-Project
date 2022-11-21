@@ -40,8 +40,8 @@ bool Character::OnCreate(Scene* scene_)
 bool Character::ReadStateMachineXML(std::string filename) {
 	stateMachine = new StateMachine(this);
 
-	State* seekPlayer = new State(STATE::SEEK);
-	State* doNothing = new State(STATE::DO_NOTHING);
+	State* seekPlayer = new State(STATE::SEEK, ACTION_SET::SEEK);
+	State* doNothing = new State(STATE::DO_NOTHING, ACTION_SET::DO_NOTHING);
 
 	Condition* ifInRange = new ConditionInRange(this);
 	doNothing->AddTransition(new Transition(ifInRange, seekPlayer));

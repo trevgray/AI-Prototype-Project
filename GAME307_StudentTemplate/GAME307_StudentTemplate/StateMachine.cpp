@@ -23,9 +23,7 @@ void StateMachine::Update() {
 		//TODO collect exit actions, transition action, add target state actions
 		currentState = targetState;
 	}
-	else {
-		//TODO process actions for current state
-	}
+	currentState->GetAction().MakeDecision();
 	//TODO return any actions
 	//but simple demo rn
 	return;

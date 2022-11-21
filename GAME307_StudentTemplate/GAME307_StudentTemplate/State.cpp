@@ -1,6 +1,6 @@
 #include "State.h"
 
-State::State() {
+State::State() : action(ACTION_SET::DO_NOTHING) {
 
 }
 

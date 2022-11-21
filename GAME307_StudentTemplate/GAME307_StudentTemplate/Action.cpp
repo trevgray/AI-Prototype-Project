@@ -1,6 +1,9 @@
 #include "Action.h"
+#include <iostream>
 
 DecisionTreeNode* Action::MakeDecision() {
-	//do something, maybe
+	if (actionSet == ACTION_SET::SEEK) {
+		std::cout << "ACTION TEST" << std::endl;
+	}
 	return this;
 }
