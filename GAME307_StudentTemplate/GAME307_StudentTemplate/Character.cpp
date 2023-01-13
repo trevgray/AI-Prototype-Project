@@ -59,12 +59,14 @@ bool Character::ReadDecisionTreeXML(std::string filename) {
 	DecisionTreeNode* trueNode = new Action(ACTION_SET::SEEK);
 	DecisionTreeNode* falseNode = new Action(ACTION_SET::DO_NOTHING);
 
-	decider = new InRangeDecision(this, trueNode, falseNode);
+	DecisionTreeNode* test2 = new InRangeDecision(this, trueNode, falseNode);
+
+	decider = new InRangeDecision(this, test2, falseNode);
 
 	return true;
 }
 
-void Character::Update(float deltaTime) //MAKE THIS THE UPDATE INSIDE THE STEERING COMPONENT :) - SteeringComponent(std::vector<SteeringBehaviour> steeringBehaviours);
+void Character::Update(float deltaTime) 
 {
 	// create a new overall steering output
 	SteeringOutput* steering; //probably do this in oncreate

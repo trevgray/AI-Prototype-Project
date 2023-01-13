@@ -5,10 +5,6 @@ DecisionTreeNode* Decision::MakeDecision() {
 	return branch->MakeDecision();
 }
 
-bool Decision::TestValue() {
-	return false;
-}
-
 DecisionTreeNode* Decision::GetBranch() {
 	if (TestValue()) {
 		return trueNode;

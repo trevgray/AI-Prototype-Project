@@ -140,7 +140,6 @@
     <ClCompile Include="ConditionInRange.cpp" />
     <ClCompile Include="ConditionOutOfRange.cpp" />
     <ClCompile Include="Decision.cpp" />
-    <ClCompile Include="DecisionTreeNode.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="InRangeDecision.cpp" />
